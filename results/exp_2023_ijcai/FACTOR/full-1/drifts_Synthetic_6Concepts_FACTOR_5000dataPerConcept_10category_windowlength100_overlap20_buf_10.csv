@@ -1,0 +1,5 @@
+dataset,alpha,window_width,overlaps,detection_buf_size,slidshap_drift_pos,p_value,statistical_test
+Synthetic_6Concepts_FACTOR_5000dataPerConcept_10category,0.01,100,20,10,47,0.0005225769746819268,t-test
+Synthetic_6Concepts_FACTOR_5000dataPerConcept_10category,0.01,100,20,10,48,0.007544838706741804,t-test
+Synthetic_6Concepts_FACTOR_5000dataPerConcept_10category,0.01,100,20,10,176,0.007367632561511184,t-test
+Synthetic_6Concepts_FACTOR_5000dataPerConcept_10category,0.01,100,20,10,298,0.004334923562746333,t-test
