@@ -49,7 +49,7 @@ def binning(inputData, intervals):
 
 
 
-def bin_2d_array(data, bin_size):
+'''def bin_2d_array(data, bin_size):
 
     data = load_data(data)
     if bin_size <= 0:
@@ -62,7 +62,7 @@ def bin_2d_array(data, bin_size):
         for j in range(num_cols):
             bin_data[i, j] = data[i, j] // bin_size
 
-    return bin_data
+    return bin_data'''
 
 
 
@@ -72,7 +72,12 @@ def bin_2d_array(data, bin_size):
 if __name__ == '__main__':
     # dataset1-timeSeries_new
 
-    print(binning("test", 19))
+    binned_data = binning("Realworld_Open", 19)
+    print(binned_data)
+    print(binned_data.shape)
+    print(binned_data[0])
+    # np.savetxt('../data/Realworld_Open_after_binning.txt', binned_data, delimiter=',')
+
     #print(bin_2d_array("test", 10))
     # (18646, 6)
 
