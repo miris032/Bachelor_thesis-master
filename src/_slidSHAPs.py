@@ -3,7 +3,7 @@ import os
 from tqdm import tqdm
 import numpy as np
 import time
-from src.binning import binning, bin_2d_array
+from src.binning import binning
 
 
 def compute_shapleyvalues(_mydata, _type, _subsets_bound=-1, approx='max'):
