@@ -7,6 +7,10 @@ from src._loadingdata import load_data
 def binning(inputData, intervals):
 
     data = load_data(inputData)
+    # delete the header and row name
+    # data = np.delete(np.delete(data, 0, axis=0), 0, axis=1)
+    data = np.array(data, dtype=float)
+    print(data)
 
     max_values = np.max(data, axis=0)
     min_values = np.min(data, axis=0)
@@ -72,13 +76,12 @@ def binning(inputData, intervals):
 if __name__ == '__main__':
     # dataset1-timeSeries_new
 
-    binned_data = binning("Realworld_Open", 19)
+    binned_data = binning("biobankdata/accs_after_filling", 19)
     print(binned_data)
     print(binned_data.shape)
     print(binned_data[0])
-    # np.savetxt('../data/Realworld_Open_after_binning.txt', binned_data, delimiter=',')
+    np.savetxt('../data/biobankdata/accs_after_filling_and_binning.csv', binned_data, delimiter=',')
 
-    #print(bin_2d_array("test", 10))
-    # (18646, 6)
+
 
 
