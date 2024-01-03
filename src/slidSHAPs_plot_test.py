@@ -94,17 +94,8 @@ def draw_4_plots(file):
     print(len(content4))
 
     fig, (ax1, ax2, ax3, ax4) = plt.subplots(4, 1)
-    #header = ('Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume')
-    # header = ('Open', 'High', 'Low', 'Close', 'Volume', 'Dividends', 'Stock', 'Splits')
-
-    #header = ('COV.DE_Open', 'ADS.DE_Open', 'AIR.DE_Open', 'ALV.DE_Open', 'BAS.DE_Open', 'BMW.DE_Open',
-              #'CBK.DE_Open', 'DTE_Open', 'EOAN.DE_Open', 'HEI.DE_Open')
-
-    # header = ('acc_shap', 'light_shap', 'mv_shap', 'sedentary_shap', 'sleep_shap', 'MET_shap')
-    # colors = ['#FF6666', '#6666FF', '#66FF66', '#FF9933', '#996699', '#66CCCC']
-
-    header = ('acc1', 'acc2', 'acc3', 'acc4', 'acc5', 'acc6', 'acc7', 'acc8', 'acc9')
-    colors = ['#FF6666', '#6666FF', '#66FF66', '#FF9933', '#996699', '#66CCCC', '#FFCC66', '#CC66FF', '#99CC66']
+    header = ('sin1', 'ADD', 'ADD', 'ADD', 'ADD', 'ADD')
+    colors = ['#FF6666', '#6666FF', '#66FF66', '#FF9933', '#996699', '#66CCCC']
 
     for i, row in enumerate(data1):
         ax1.plot(row, label=header[i], linewidth=0.3, color=colors[i])
@@ -151,33 +142,4 @@ def draw_4_plots(file):
 
 if __name__ == '__main__':
 
-    '''
-    data = load_data("results/_window_width(d): 1000, _overlap(a): 900")
-    drawPlot(data)
-    '''
-
-    draw_4_plots('accs_after_filling_and_binning')
-
-
-
-
-    '''draw_4_plots('Close')
-        draw_4_plots('High')
-        draw_4_plots('Low')
-        draw_4_plots('Open')
-        draw_4_plots('Adj Close')
-        draw_4_plots('Volume')'''
-
-
-    '''data1 = load_data0('ticker_data_result/columns_minutely/Volume/50, 30%')
-    data2 = load_data0('ticker_data_result/columns_daily/Open/50, 70%')
-    data3 = load_data0('ticker_data_result/columns_minutely/Volume/200, 30%')
-    data4 = load_data0('ticker_data_result/columns_minutely/Volume/200, 70%')'''
-
-    #print(data1.shape)
-    #print(data2.shape)
-    #print(data3.shape)
-    #print(data4.shape)
-
-
-
+    draw_4_plots('sin_with_noise_events')

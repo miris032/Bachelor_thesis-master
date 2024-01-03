@@ -18,27 +18,6 @@ def getHeader(file):
 
 
 root = Path(__file__).resolve().parent.parent
-def load_data0(data):
-
-    path = f'{root}/data/' + data
-
-    if os.path.exists(path + '.pkl'):
-        _mydata = pd.read_pickle(path + '.pkl')
-
-    elif os.path.exists(path + '.txt'):
-        _mydata = np.loadtxt(path + '.txt', delimiter=",")
-
-    elif os.path.exists(path + '.csv'):
-        _mydata = np.asarray(pd.read_csv(path + '.csv', delimiter=","))
-    #         _mydata = _mydata)
-    else:
-        raise FileNotFoundError(path+'.*')
-
-    return _mydata
-
-
-
-
 def drawPlot(data):
 
     '''max_length = max(len(row) for row in data)
@@ -65,7 +44,7 @@ def drawPlot(data):
 
 
 
-def draw_4_plots(file, time_interval):
+def draw_4_plots(file):
 
     directory_path = '/home/miris/Desktop/Bachelor_thesis-master/data/ticker_data/columns_minutely'
     '''with os.scandir(directory_path) as entries:
@@ -75,15 +54,15 @@ def draw_4_plots(file, time_interval):
 
 
     filename = os.path.basename(file)
-    data1 = np.asarray(pd.read_csv(f'{root}/data/ticker_data_result/' + f'{time_interval}' + '/' + f'{file}' + '/50, 30%.txt', delimiter=",", header=None))
-    data2 = np.asarray(pd.read_csv(f'{root}/data/ticker_data_result/' + f'{time_interval}' + '/' + f'{file}' + '/50, 70%.txt', delimiter=",", header=None))
-    data3 = np.asarray(pd.read_csv(f'{root}/data/ticker_data_result/' + f'{time_interval}' + '/' + f'{file}' + '/200, 30%.txt', delimiter=",", header=None))
-    data4 = np.asarray(pd.read_csv(f'{root}/data/ticker_data_result/' + f'{time_interval}' + '/' + f'{file}' + '/200, 70%.txt', delimiter=",", header=None))
+    data1 = np.asarray(pd.read_csv(f'{root}/results/exp_2023_ijcai/' + f'{file}' + '/full-1/slidshaps_Realworld_' + f'{file}' + '_windowlength50_overlap15.txt', delimiter=",", header=None))
+    data2 = np.asarray(pd.read_csv(f'{root}/results/exp_2023_ijcai/' + f'{file}' + '/full-1/slidshaps_Realworld_' + f'{file}' + '_windowlength50_overlap35.txt', delimiter=",", header=None))
+    data3 = np.asarray(pd.read_csv(f'{root}/results/exp_2023_ijcai/' + f'{file}' + '/full-1/slidshaps_Realworld_' + f'{file}' + '_windowlength200_overlap60.txt', delimiter=",", header=None))
+    data4 = np.asarray(pd.read_csv(f'{root}/results/exp_2023_ijcai/' + f'{file}' + '/full-1/slidshaps_Realworld_' + f'{file}' + '_windowlength200_overlap140.txt', delimiter=",", header=None))
 
-    pkl1 = pd.read_pickle(f'{root}/results/exp_2023_ijcai/' + f'{file}' + '_' + f'{time_interval}' + '/full-1/slidshap_drifts_bi_predictions_Realworld_' + f'{file}' + '_' + f'{time_interval}' + '_windowlength50_overlap15.pkl')
-    pkl2 = pd.read_pickle(f'{root}/results/exp_2023_ijcai/' + f'{file}' + '_' + f'{time_interval}' + '/full-1/slidshap_drifts_bi_predictions_Realworld_' + f'{file}' + '_' + f'{time_interval}' + '_windowlength50_overlap35.pkl')
-    pkl3 = pd.read_pickle(f'{root}/results/exp_2023_ijcai/' + f'{file}' + '_' + f'{time_interval}' + '/full-1/slidshap_drifts_bi_predictions_Realworld_' + f'{file}' + '_' + f'{time_interval}' + '_windowlength200_overlap60.pkl')
-    pkl4 = pd.read_pickle(f'{root}/results/exp_2023_ijcai/' + f'{file}' + '_' + f'{time_interval}' + '/full-1/slidshap_drifts_bi_predictions_Realworld_' + f'{file}' + '_' + f'{time_interval}' + '_windowlength200_overlap140.pkl')
+    pkl1 = pd.read_pickle(f'{root}/results/exp_2023_ijcai/' + f'{file}' + '/full-1/slidshap_drifts_bi_predictions_Realworld_' + f'{file}' + '_windowlength50_overlap15.pkl')
+    pkl2 = pd.read_pickle(f'{root}/results/exp_2023_ijcai/' + f'{file}' + '/full-1/slidshap_drifts_bi_predictions_Realworld_' + f'{file}' + '_windowlength50_overlap35.pkl')
+    pkl3 = pd.read_pickle(f'{root}/results/exp_2023_ijcai/' + f'{file}' + '/full-1/slidshap_drifts_bi_predictions_Realworld_' + f'{file}' + '_windowlength200_overlap60.pkl')
+    pkl4 = pd.read_pickle(f'{root}/results/exp_2023_ijcai/' + f'{file}' +  '/full-1/slidshap_drifts_bi_predictions_Realworld_' + f'{file}' + '_windowlength200_overlap140.pkl')
     content1 = list(pkl1.values())[0]
     content2 = list(pkl2.values())[0]
     content3 = list(pkl3.values())[0]
@@ -103,7 +82,7 @@ def draw_4_plots(file, time_interval):
     # header = ('acc_shap', 'light_shap', 'mv_shap', 'sedentary_shap', 'sleep_shap', 'MET_shap')
     # colors = ['#FF6666', '#6666FF', '#66FF66', '#FF9933', '#996699', '#66CCCC']
 
-    header = ('Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume')
+    header = ('Open', 'High', 'Low', 'Close', 'Volume', 'Dividends', 'Stock Splits')
     colors = ['#FF6666', '#6666FF', '#66FF66', '#FF9933', '#996699', '#66CCCC', '#FFCC66', '#CC66FF', '#99CC66']
 
     for i, row in enumerate(data1):
@@ -136,7 +115,7 @@ def draw_4_plots(file, time_interval):
 
     # plt.legend(bbox_to_anchor=(0.1, 0.1), loc='upper left')
     fig.set_size_inches(20, 8)
-    fig.suptitle(f'{filename}' + '_' + f'{time_interval}' + '_detected', fontsize=16, fontweight='bold')
+    fig.suptitle(f'{filename}' + '_' + '_detected', fontsize=16, fontweight='bold')
     plt.subplots_adjust(hspace=0.8)
     plt.legend(loc=2, bbox_to_anchor=(1.005, 1.6))
 
@@ -156,28 +135,8 @@ if __name__ == '__main__':
     drawPlot(data)
     '''
 
-    draw_4_plots('ADS.DE', 'daily')
-
-
-
-
-    '''draw_4_plots('Close')
-        draw_4_plots('High')
-        draw_4_plots('Low')
-        draw_4_plots('Open')
-        draw_4_plots('Adj Close')
-        draw_4_plots('Volume')'''
-
-
-    '''data1 = load_data0('ticker_data_result/columns_minutely/Volume/50, 30%')
-    data2 = load_data0('ticker_data_result/columns_daily/Open/50, 70%')
-    data3 = load_data0('ticker_data_result/columns_minutely/Volume/200, 30%')
-    data4 = load_data0('ticker_data_result/columns_minutely/Volume/200, 70%')'''
-
-    #print(data1.shape)
-    #print(data2.shape)
-    #print(data3.shape)
-    #print(data4.shape)
+    # draw_4_plots('ADS.DE', 'daily')
+    draw_4_plots('1COV.DE_minutely_oneweek')
 
 
 

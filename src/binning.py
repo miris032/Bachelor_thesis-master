@@ -4,13 +4,13 @@ from src._loadingdata import load_data
 
 
 
-def binning(inputData, intervals):
+def binning(input_file, intervals):
 
-    data = load_data(inputData)
+    data = load_data(input_file)
     # delete the header and row name
     # data = np.delete(np.delete(data, 0, axis=0), 0, axis=1)
     data = np.array(data, dtype=float)
-    print(data)
+    print(f'the shape of original data {data.shape}')
 
     max_values = np.max(data, axis=0)
     min_values = np.min(data, axis=0)
@@ -69,18 +69,17 @@ def binning(inputData, intervals):
     return bin_data'''
 
 
-
+def main(file, intervals):
+    binned_data = binning(file, intervals)
+    print(f'the shape of binned data {binned_data.shape}')
+    np.savetxt('../data/' + file + '_binned.csv', binned_data, delimiter=',')
 
 
 
 if __name__ == '__main__':
-    # dataset1-timeSeries_new
+    main("Realworld_High_hourly", 19)
 
-    binned_data = binning("biobankdata/accs_after_filling", 19)
-    print(binned_data)
-    print(binned_data.shape)
-    print(binned_data[0])
-    np.savetxt('../data/biobankdata/accs_after_filling_and_binning.csv', binned_data, delimiter=',')
+
 
 
 
