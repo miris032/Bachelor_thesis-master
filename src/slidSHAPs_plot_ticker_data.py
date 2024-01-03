@@ -73,17 +73,11 @@ def draw_4_plots(file):
     print(len(content4))
 
     fig, (ax1, ax2, ax3, ax4) = plt.subplots(4, 1)
-    #header = ('Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume')
-    # header = ('Open', 'High', 'Low', 'Close', 'Volume', 'Dividends', 'Stock', 'Splits')
 
-    #header = ('COV.DE_Open', 'ADS.DE_Open', 'AIR.DE_Open', 'ALV.DE_Open', 'BAS.DE_Open', 'BMW.DE_Open',
-              #'CBK.DE_Open', 'DTE_Open', 'EOAN.DE_Open', 'HEI.DE_Open')
-
-    # header = ('acc_shap', 'light_shap', 'mv_shap', 'sedentary_shap', 'sleep_shap', 'MET_shap')
-    # colors = ['#FF6666', '#6666FF', '#66FF66', '#FF9933', '#996699', '#66CCCC']
-
-    header = ('Open', 'High', 'Low', 'Close', 'Volume', 'Dividends', 'Stock Splits')
-    colors = ['#FF6666', '#6666FF', '#66FF66', '#FF9933', '#996699', '#66CCCC', '#FFCC66', '#CC66FF', '#99CC66']
+    header = (f'1COV.DE_{file}', f'ADS.DE_{file}', f'AIR.DE_{file}', f'ALV.DE_{file}', f'BAS.DE_{file}', f'BMW.DE_{file}', f'CBK.DE_{file}', f'DTE.DE_{file}', f'EOAN.DE_{file}', f'HEI.DE_{file}')
+    # header = ('Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume')
+    # header = ('Open', 'High', 'Low', 'Close', 'Volume', 'Dividends', 'Stock Splits')
+    colors = ['#FF6666', '#6666FF', '#66FF66', '#FF9933', '#996699', '#66CCCC', '#FFCC66', '#CC66FF', '#99CC66', '#D08AB9']
 
     for i, row in enumerate(data1):
         ax1.plot(row, label=header[i], linewidth=0.3, color=colors[i])
@@ -117,7 +111,7 @@ def draw_4_plots(file):
     fig.set_size_inches(20, 8)
     fig.suptitle(f'{filename}' + '_' + '_detected', fontsize=16, fontweight='bold')
     plt.subplots_adjust(hspace=0.8)
-    plt.legend(loc=2, bbox_to_anchor=(1.005, 1.6))
+    plt.legend(loc=2, bbox_to_anchor=(1.005, 1.6), prop={'size': 6})
 
     plt.show()
     # plt.savefig('../data/ticker_data_result/' + f'{filename}.png')
@@ -135,8 +129,7 @@ if __name__ == '__main__':
     drawPlot(data)
     '''
 
-    # draw_4_plots('ADS.DE', 'daily')
-    draw_4_plots('1COV.DE_minutely_oneweek')
+    draw_4_plots('High_hourly_binned')
 
 
 

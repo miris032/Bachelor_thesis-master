@@ -94,12 +94,6 @@ def draw_4_plots(file):
     print(len(content4))
 
     fig, (ax1, ax2, ax3, ax4) = plt.subplots(4, 1)
-    #header = ('Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume')
-    # header = ('Open', 'High', 'Low', 'Close', 'Volume', 'Dividends', 'Stock', 'Splits')
-
-    #header = ('COV.DE_Open', 'ADS.DE_Open', 'AIR.DE_Open', 'ALV.DE_Open', 'BAS.DE_Open', 'BMW.DE_Open',
-              #'CBK.DE_Open', 'DTE_Open', 'EOAN.DE_Open', 'HEI.DE_Open')
-
     # header = ('acc_shap', 'light_shap', 'mv_shap', 'sedentary_shap', 'sleep_shap', 'MET_shap')
     # colors = ['#FF6666', '#6666FF', '#66FF66', '#FF9933', '#996699', '#66CCCC']
 
