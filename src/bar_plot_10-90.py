@@ -24,7 +24,6 @@ if __name__ == '__main__':
     axes[0].set_xlabel('a (overlap) in percent')
     axes[0].set_ylabel('number of detected drift points')
     axes[0].set_title('d (window length) = 50')
-    axes[0].set_ylim(0.25, max(data_array1.max(), data_array2.max(), data_array3.max()))
 
     # 画第2个条形图
     axes[1].bar(x_ticks - bar_width / 2, data_array2.flatten(), width=bar_width, color='lightblue', edgecolor='white')
@@ -33,7 +32,6 @@ if __name__ == '__main__':
     axes[1].set_xlabel('a (overlap) in percent')
     axes[1].set_ylabel('number of detected drift points')
     axes[1].set_title('d (window length) = 100')
-    axes[1].set_ylim(0.25, max(data_array1.max(), data_array2.max(), data_array3.max()))
 
     # 画第3个条形图
     axes[2].bar(x_ticks - bar_width / 2, data_array3, width=bar_width, color='lightblue', edgecolor='white')
@@ -42,7 +40,12 @@ if __name__ == '__main__':
     axes[2].set_xlabel('a (overlap) in percent')
     axes[2].set_ylabel('number of detected drift points')
     axes[2].set_title('d (window length) = 200')
-    axes[2].set_ylim(0.25, max(data_array1.max(), data_array2.max(), data_array3.max()))
+
+    # 设置相同的y轴刻度范围
+    min_y = min(data_array1.min(), data_array2.min(), data_array3.min())
+    max_y = max(data_array1.max(), data_array2.max(), data_array3.max())
+    for ax in axes:
+        ax.set_ylim(min_y, max_y+10)
 
     # 调整子图之间的间距
     plt.subplots_adjust(wspace=0.4)
