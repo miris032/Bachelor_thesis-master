@@ -56,7 +56,7 @@ def drawPlot(file, d, a):
     x_time = [datetime.strptime(d, '%Y-%m-%d %H:%M:%S') for d in time]
 
     pkl1 = pd.read_pickle(
-        f'{root}/../results/exp_2023_ijcai/' + f'{file}' + '_and_binning' + '/full-1/slidshap_drifts_bi_predictions_Realworld_' + f'{file}' + '_and_binning' + '_windowlength' + f'{d}' + '_overlap' + f'{a}' + '.pkl')
+        f'{root}/../results/exp_2023_ijcai/' + f'{file}' + '' + '/full-1/slidshap_drifts_bi_predictions_Realworld_' + f'{file}' + '' + '_windowlength' + f'{d}' + '_overlap' + f'{a}' + '.pkl')
     content1 = list(pkl1.values())[0]
     print(f'slidSHAPs predications: {content1}')
     print(f'length of slidSHAPs predications: {len(content1)}')
@@ -73,20 +73,28 @@ def drawPlot(file, d, a):
     plt.figure(figsize=(15, 3))
     plt.suptitle(f'{filename}', fontsize=16, fontweight='bold')
     header = ('acc1', 'acc2', 'acc3', 'acc4', 'acc5', 'acc6', 'acc7', 'acc8', 'acc9')
+
     for i, row in enumerate(data1):
-        plt.plot(x_time, row, label=header[i], linewidth=0.2, alpha=0.5)
+        # plt.plot(x_time, row, label=header[i], linewidth=0.2, alpha=0.5)
+        plt.plot(row, label=header[i], linewidth=0.2, alpha=0.5)
     for i, value in enumerate(timeseries_predictions):
         if value == 1:
-            plt.axvline(x=x_time[i], color='red', linestyle='-', linewidth=0.8, alpha=0.01)
-    plt.tick_params(axis='x', which='both', bottom=False, top=False, labelbottom=False)
+            # plt.axvline(x=x_time[i], color='red', linestyle='-', linewidth=0.8, alpha=0.01)
+            plt.axvline(x=i, color='red', linestyle='-', linewidth=0.8, alpha=0.01)
 
-    plt.legend(bbox_to_anchor=(1, 1), loc='upper left')
+    HDDDM = [1199, 3199, 3999, 5599, 6399, 7199, 7999, 9599, 10399, 13999, 14799, 16399, 17199, 18399, 19199, 20399, 21199]
+    for pos in HDDDM:
+        plt.axvline(x=pos, color='blue', linestyle='--', linewidth=0.8, alpha=0.5)
+
+    plt.tick_params(axis='x', which='both', bottom=False, top=False, labelbottom=True)
+
+    plt.legend(bbox_to_anchor=(1, 1.03), loc='upper left')
 
     plt.show()
-    # plt.savefig('../biobankdata_result/accs_after_filling/' + f'{filename}.png')
+    # plt.savefig('../biobankdata_plots/accs_after_filling/' + f'{filename}.png')
     # plt.close()
 
 
 if __name__ == '__main__':
     # draw accs_after_filling, not accs_after_filling_and_binning as the original ts
-    drawPlot('accs_after_filling', 200, 140)
+    drawPlot('accs_after_filling_events', 200, 140)

@@ -1,51 +1,57 @@
 {
+  "dataset1-timeSeries_after_filling_events_binned": {
+    "window_length": [50, 200],
+    "overlap": [0.3, 0.7],
+    "approximation_type": "full",
+    "subsets_bound": [-1]
+  },
+
+  "Open_hourly_binned50": {
+    "window_length": [100],
+    "overlap": [0.3, 0.7],
+    "approximation_type": "full",
+    "subsets_bound": [-1]
+  },
+
+  "BMW.DE_daily_binned50": {
+    "window_length": [30, 50, 100, 200],
+    "overlap": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
+    "approximation_type": "full",
+    "subsets_bound": [-1]
+  },
+
+  "BMW.DE_hourly_binned50": {
+    "window_length": [30, 50, 100, 200],
+    "overlap": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
+    "approximation_type": "full",
+    "subsets_bound": [-1]
+  },
+
+  "BMW.DE_minutely_binned50": {
+    "window_length": [30, 50, 100, 200],
+    "overlap": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
+    "approximation_type": "full",
+    "subsets_bound": [-1]
+  },
+
+
+  "BMW.DE_minutely_events_binned50": {
+    "window_length": [30, 50],
+    "overlap": [0.3, 0.7],
+    "approximation_type": "full",
+    "subsets_bound": [-1]
+  },
+
   "Synthetic": {
-    "correlation_func": [
-      "ADD", "MUL", "FACTOR", "AND", "OR", "XOR", "MIX"
-    ],
-    "categories_per_feature": [10],
+    "correlation_func": ["MUL"],
+    "window_length": [100],
+    "categories_per_feature": [4],
     "number_of_concepts": [6],
-    "concept_size": [5000],
-    "window_length": [100],
-    "overlap": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
-    "approximation_type": "full",
-    "subsets_bound": [-1]
-  },
-  "LED_10000_10": {
-    "window_length": [100],
-    "overlap": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
-    "approximation_type": "full",
-    "subsets_bound": [-1]
-  },
-  "CMC": {
-    "window_length": [100],
     "overlap": [0.3],
-    "approximation_type": "full",
-    "subsets_bound": [-1]
-  },
-  "Cancer": {
-    "window_length": [10],
-    "overlap": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
-    "approximation_type": "full",
-    "subsets_bound": [-1]
-  },
-  "KDD_all": {
-    "window_length": [100],
-    "overlap": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
-    "approximation_type": "bounded",
-    "subsets_bound": [2]
-  },
-  "MSL": {
-    "window_length": [100],
-    "overlap": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
-    "approximation_type": "bounded",
-    "subsets_bound": [2]
-  },
-  "Poker": {
-    "window_length": [100],
-    "overlap": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
-    "approximation_type": "full",
-    "subsets_bound": [-1]
+    "concept_size": [5000],
+    "subsets_bound": [-1],
+    "approximation_type": "full"
   }
+
 
 }

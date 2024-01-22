@@ -1,0 +1,7 @@
+dataset,alpha,window_width,overlaps,detection_buf_size,slidshap_drift_pos,p_value,statistical_test
+Realworld_High_hourly_events,0.01,20,14,10,94,4.991900080173653e-08,t-test
+Realworld_High_hourly_events,0.01,20,14,10,148,1.90803232265939e-06,t-test
+Realworld_High_hourly_events,0.01,20,14,10,149,9.944413570054201e-05,t-test
+Realworld_High_hourly_events,0.01,20,14,10,150,0.00045340908112460887,t-test
+Realworld_High_hourly_events,0.01,20,14,10,151,0.0025908342299593677,t-test
+Realworld_High_hourly_events,0.01,20,14,10,152,0.0051128491322234215,t-test

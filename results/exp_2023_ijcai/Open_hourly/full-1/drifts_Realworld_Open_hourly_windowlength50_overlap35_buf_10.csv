@@ -1,0 +1,16 @@
+dataset,alpha,window_width,overlaps,detection_buf_size,slidshap_drift_pos,p_value,statistical_test
+Realworld_Open_hourly,0.01,50,35,10,48,1.9747760753652574e-09,t-test
+Realworld_Open_hourly,0.01,50,35,10,49,2.043749935150969e-07,t-test
+Realworld_Open_hourly,0.01,50,35,10,50,2.1434710719872554e-05,t-test
+Realworld_Open_hourly,0.01,50,35,10,51,0.0018827322273053402,t-test
+Realworld_Open_hourly,0.01,50,35,10,114,0.00010453331188637802,t-test
+Realworld_Open_hourly,0.01,50,35,10,115,0.0005536397895224463,t-test
+Realworld_Open_hourly,0.01,50,35,10,206,0.0010193699426872408,t-test
+Realworld_Open_hourly,0.01,50,35,10,207,0.0011492677878489003,t-test
+Realworld_Open_hourly,0.01,50,35,10,215,0.00021893753693986052,t-test
+Realworld_Open_hourly,0.01,50,35,10,240,0.0005303836751842108,t-test
+Realworld_Open_hourly,0.01,50,35,10,241,0.009649936222365464,t-test
+Realworld_Open_hourly,0.01,50,35,10,251,0.0006042711737062838,t-test
+Realworld_Open_hourly,0.01,50,35,10,252,0.001405775941317434,t-test
+Realworld_Open_hourly,0.01,50,35,10,253,0.002941306383020069,t-test
+Realworld_Open_hourly,0.01,50,35,10,254,0.0018494662422404667,t-test

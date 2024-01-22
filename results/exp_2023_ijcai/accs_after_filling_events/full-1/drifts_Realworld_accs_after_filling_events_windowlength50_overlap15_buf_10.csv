@@ -1,0 +1,14 @@
+dataset,alpha,window_width,overlaps,detection_buf_size,slidshap_drift_pos,p_value,statistical_test
+Realworld_accs_after_filling_events,0.01,50,15,10,9,6.731530182009067e-08,t-test
+Realworld_accs_after_filling_events,0.01,50,15,10,10,7.426038773891735e-07,t-test
+Realworld_accs_after_filling_events,0.01,50,15,10,11,1.3621623516147971e-05,t-test
+Realworld_accs_after_filling_events,0.01,50,15,10,12,0.00021515076136713714,t-test
+Realworld_accs_after_filling_events,0.01,50,15,10,13,0.0013056953189956768,t-test
+Realworld_accs_after_filling_events,0.01,50,15,10,14,0.005795442694842795,t-test
+Realworld_accs_after_filling_events,0.01,50,15,10,172,0.00044358772575124925,t-test
+Realworld_accs_after_filling_events,0.01,50,15,10,173,0.0027666211801109166,t-test
+Realworld_accs_after_filling_events,0.01,50,15,10,205,8.902762722077655e-05,t-test
+Realworld_accs_after_filling_events,0.01,50,15,10,206,0.0006913498213344334,t-test
+Realworld_accs_after_filling_events,0.01,50,15,10,542,0.0012478108816294563,t-test
+Realworld_accs_after_filling_events,0.01,50,15,10,543,0.006132690187637987,t-test
+Realworld_accs_after_filling_events,0.01,50,15,10,566,0.00825710059657779,t-test
