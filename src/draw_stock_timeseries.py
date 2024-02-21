@@ -8,21 +8,6 @@ from datetime import datetime
 root = Path(__file__).resolve().parent.parent
 
 
-def only_retain_last_1(input_list):
-    result_list = []
-    current_sequence = 0
-
-    for element in input_list:
-        if element == 1:
-            current_sequence += 1
-        else:
-            current_sequence = 0
-
-        result_list.append(1 if current_sequence == 1 else 0)
-
-    return result_list
-
-
 def plot_timeseries(file, d, a):
 
     events = '(events)' in file or '(events2)' in file
