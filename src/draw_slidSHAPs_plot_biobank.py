@@ -33,10 +33,10 @@ def draw_4_plots(file):
     pkl2 = pd.read_pickle(f'{root}/results/exp_2023_ijcai/{file}/full-1/slidshap_drifts_bi_predictions_Realworld_{file}_windowlength50_overlap35.pkl')
     pkl3 = pd.read_pickle(f'{root}/results/exp_2023_ijcai/{file}/full-1/slidshap_drifts_bi_predictions_Realworld_{file}_windowlength200_overlap60.pkl')
     pkl4 = pd.read_pickle(f'{root}/results/exp_2023_ijcai/{file}/full-1/slidshap_drifts_bi_predictions_Realworld_{file}_windowlength200_overlap140.pkl')
-    content1 = list(pkl1.values())[0]
-    content2 = list(pkl2.values())[0]
-    content3 = list(pkl3.values())[0]
-    content4 = list(pkl4.values())[0]
+    slidshap_prediction1 = list(pkl1.values())[0]
+    slidshap_prediction2 = list(pkl2.values())[0]
+    slidshap_prediction3 = list(pkl3.values())[0]
+    slidshap_prediction4 = list(pkl4.values())[0]
 
     fig, (ax1, ax2, ax3, ax4) = plt.subplots(4, 1)
 
@@ -53,28 +53,28 @@ def draw_4_plots(file):
 
     for i, row in enumerate(data1):
         ax1.plot(row, label=header[i], linewidth=0.3, color=colors[i])
-    for i, value in enumerate(content1):
+    for i, value in enumerate(slidshap_prediction1):
         if value == 1:
             ax1.axvline(x=i, color='red', linestyle='--', linewidth=0.8, alpha=1)
     ax1.set_title('length d = 50, overlap a = 30%')
 
     for i, row in enumerate(data2):
         ax2.plot(row, label=header[i], linewidth=0.3, color=colors[i])
-    for i, value in enumerate(content2):
+    for i, value in enumerate(slidshap_prediction2):
         if value == 1:
             ax2.axvline(x=i, color='red', linestyle='--', linewidth=0.8, alpha=1)
     ax2.set_title('length d = 50, overlap a = 70%')
 
     for i, row in enumerate(data3):
         ax3.plot(row, label=header[i], linewidth=0.3, color=colors[i])
-    for i, value in enumerate(content3):
+    for i, value in enumerate(slidshap_prediction3):
         if value == 1:
             ax3.axvline(x=i, color='red', linestyle='--', linewidth=0.8, alpha=1)
     ax3.set_title('length d = 200, overlap a = 30%')
 
     for i, row in enumerate(data4):
         ax4.plot(row, label=header[i], linewidth=0.3, color=colors[i])
-    for i, value in enumerate(content4):
+    for i, value in enumerate(slidshap_prediction4):
         if value == 1:
             ax4.axvline(x=i, color='red', linestyle='--', linewidth=0.8, alpha=1)
     ax4.set_title('length d = 200, overlap a = 70%')

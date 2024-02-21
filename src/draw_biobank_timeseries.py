@@ -33,7 +33,7 @@ def plot_timeseries(file, d, a):
     data1 = data1.astype(float)
 
     pkl = pd.read_pickle(f'{root}/results/exp_2023_ijcai/{file}_filled_binned/full-1/ts_drifts_bi_predictions_Realworld_{file}_filled_binned_windowlength{d}_overlap{a}.pkl')
-    ts_predicitions = list(pkl.values())[0]
+    ts_predictions = list(pkl.values())[0]
     HDDDM = pd.read_csv(f'{root}/results/exp_2023_ijcai/{file}_filled_binned/full-1/HDDDM_bi_predictions_{file}_filled_binned.csv', delimiter=",", header=None).iloc[:, 0].tolist()
 
     if dataset_1_to_9:
@@ -45,7 +45,7 @@ def plot_timeseries(file, d, a):
     plt.figure(figsize=(20, 2))
     for i, row in enumerate(data1):
         plt.plot(row, color=colors[i], label=header[i], linewidth=0.3) if dataset_1_to_9 else plt.plot(row, label=header[i], linewidth=0.3)
-    for i, value in enumerate(ts_predicitions):
+    for i, value in enumerate(ts_predictions):
         if value == 1:
             plt.axvline(x=i, color='red', linestyle='--', linewidth=0.8, alpha=1)
 
