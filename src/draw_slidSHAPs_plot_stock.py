@@ -1,4 +1,5 @@
 import csv
+import math
 import os
 from pathlib import Path
 from src.util2 import ts_pos_to_slid_pos
@@ -11,7 +12,7 @@ root = Path(__file__).resolve().parent.parent
 def draw_4_plots(file, l, a):
 
     events = '(events)' in file or '(events2)' in file
-    dataset_1_to_9 = file.startswith('dataset')
+    mix = any(file.startswith(prefix) for prefix in ('Open', 'Close', 'High', 'Low', 'Volume', 'Adj Close'))
 
     filename = os.path.basename(file)
     data1 = np.asarray(pd.read_csv(f'{root}/results/exp_2023_ijcai/{file}/full-1/slidshaps_Realworld_{file}_windowlength{l[0]}_overlap{int(l[0] * a[0] /100)}.txt', delimiter=",", header=None))
@@ -30,12 +31,13 @@ def draw_4_plots(file, l, a):
 
     fig, (ax1, ax2, ax3, ax4) = plt.subplots(4, 1)
 
-    if dataset_1_to_9:
-        header = ('acc_shap', 'light_shap', 'mv_shap', 'sedentary_shap', 'sleep_shap', 'MET_shap')
-        colors = ('#FF6666', '#6666FF', '#66FF66', '#FF9933', '#996699', '#66CCCC')
+    if mix:
+        header = (f'1COV.DE', f'ADS.DE', f'AIR.DE', f'ALV.DE', f'BAS.DE', f'BMW.DE', f'CBK.DE', f'DTE.DE', f'EOAN.DE', f'HEI.DE')
+    elif file.split('_')[1] == 'daily':
+        header = ('Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume')
     else:
-        header = ('acc1', 'acc2', 'acc3', 'acc4', 'acc5', 'acc6', 'acc7', 'acc8', 'acc9')
-        colors = ['#FF6666', '#6666FF', '#66FF66', '#FF9933', '#996699', '#66CCCC', '#FFCC66', '#CC66FF', '#99CC66']
+        header = ('Open', 'High', 'Low', 'Close', 'Volume')
+    colors = ['#FF6666', '#6666FF', '#66FF66', '#FF9933', '#996699', '#66CCCC', '#FFCC66', '#CC66FF', '#99CC66', '#D08AB9']
 
     for i, row in enumerate(data1):
         ax1.plot(row, label=header[i], linewidth=0.5, color=colors[i])
@@ -65,18 +67,38 @@ def draw_4_plots(file, l, a):
             ax4.axvline(x=i, color='red', linestyle='--', linewidth=1)
     ax4.set_title(f'length d = {l[1]}, overlap a = {a[1]}%')
 
-    # shadow areas
-    if events:
-        insert_starts = (2501, 6751, 11001, 15251, 19501)
-        insert_ends = (3251, 7501, 11751, 16001, 20251)
-        ylim = plt.gca().get_ylim()
+    # draw the events areas
+    if '(events)' in file or '(events2)' in file:
+        if file.split('_')[1] == 'daily':
+            '''insert_starts = (1201, 2651, 4101, 5551, 7001)
+            insert_ends = (1450, 2900, 4350, 5800, 7250)'''
+            insert_starts = (1200, 2400, 3600, 4800, 6000)
+            insert_ends = (1450, 2650, 3850, 5050, 6250)
+        elif file.split('_')[1] == 'hourly':
+            '''insert_starts = (1001, 2201, 3401, 4601, 5801)
+            insert_ends = (1200, 2400, 3600, 4800, 6000)'''
+            insert_starts = (1000, 2000, 3000, 4000, 5000)
+            insert_ends = (1200, 2200, 3200, 4200, 5200)
+        elif file.split('_')[1] == 'minutely':
+            '''insert_starts = (301, 671, 1041, 1411, 1781)
+            insert_ends = (370, 740, 1110, 1480, 1850)'''
+            insert_starts = (300, 600, 900, 1200, 1500)
+            insert_ends = (370, 670, 970, 1270, 1570)
+            # mix
+        else:
+            '''insert_starts = (1001, 2201, 3401, 4601, 5801)
+            insert_ends = (1200, 2400, 3600, 4800, 6000)'''
+            insert_starts = (1000, 2000, 3000, 4000, 5000)
+            insert_ends = (1200, 2200, 3200, 4200, 5200)
 
+        # shadow areas
+        ylim = plt.gca().get_ylim()
         for i, axi in enumerate([ax1, ax2]):
             start_slidSHAPs = ts_pos_to_slid_pos(insert_starts, l[0], a[i])
             end_slidSHAPs = ts_pos_to_slid_pos(insert_ends, l[0], a[i])
             for j in range(len(insert_starts)):
                 print(f'{start_slidSHAPs[j]}-{end_slidSHAPs[j]}')
-                axi.fill_between(np.linspace(start_slidSHAPs[j], end_slidSHAPs[j]), ylim[0], ylim[1], color='gray', hatch='///', alpha=0.2)
+                axi.fill_between(np.linspace(start_slidSHAPs[j], end_slidSHAPs[j]), 0, ylim[1], color='gray', hatch='///', alpha=0.2)
         print()
         for i, axi in enumerate([ax3, ax4]):
             start_slidSHAPs = ts_pos_to_slid_pos(insert_starts, l[1], a[i])
@@ -84,7 +106,6 @@ def draw_4_plots(file, l, a):
             for j in range(len(insert_starts)):
                 print(f'{start_slidSHAPs[j]}-{end_slidSHAPs[j]}')
                 axi.fill_between(np.linspace(start_slidSHAPs[j], end_slidSHAPs[j]), ylim[0], ylim[1], color='gray', hatch='///', alpha=0.2)
-
 
     # plt.legend(bbox_to_anchor=(0.1, 0.1), loc='upper left')
     fig.set_size_inches(20, 8)
@@ -97,21 +118,17 @@ def draw_4_plots(file, l, a):
     all_labels = existing_labels + ['slidSHAPs detection']
     plt.legend(handles=all_handles, labels=all_labels, loc='upper left', bbox_to_anchor=(1.005, 6.4), prop={'size': 8})
 
-    plt.savefig(f'../data/biobankdata_plots/slidshap_{filename}.png')
+    plt.savefig(f'../data/ticker_data_plots/slidshap_{filename}.png')
     # plt.show()
-    print(f'slidSHAPs result is saved in data/biobankdata_plots/slidshap_{filename}.png')
+    print(f'slidSHAPs result is saved in data/ticker_data_plots/slidshap_{filename}.png')
     print()
     plt.close()
 
 
 if __name__ == '__main__':
 
-    draw_4_plots('dataset1-timeSeries_filled', (100, 200), (30, 70))
-    # draw_4_plots('accs_filled_binned')
-
-
-
-
+    draw_4_plots('BMW.DE_daily_binned50', (30, 50), (30, 70))
+    # draw_4_plots('Open_hourly_events_binned50', (50, 100), (30, 70))
 
 
 
