@@ -50,28 +50,28 @@ def drawPlot(data):
     label_length = len(x_labels)
 
     for i, row in enumerate(data1):
-        ax1.plot(row, label=categories1[i], linewidth=1)
+        ax1.plot_timeseries(row, label=categories1[i], linewidth=1)
     ax1.legend(bbox_to_anchor=(1, 1), loc='upper left')
     ax1.set_xticks(np.arange(label_length))
     ax1.set_xticklabels([])
     ax1.set_title('overall Average & Standard deviation')
 
     for i, row in enumerate(data2):
-        ax2.plot(row, label=categories2[i], linewidth=1)
+        ax2.plot_timeseries(row, label=categories2[i], linewidth=1)
     ax2.legend(bbox_to_anchor=(1, 1), loc='upper left')
     ax2.set_xticks(np.arange(label_length))
     ax2.set_xticklabels([])
     ax2.set_title('calibration-Offset(g) on x, y, z axis')
 
     for i, row in enumerate(data3):
-        ax3.plot(row, label=categories2[i], linewidth=1)
+        ax3.plot_timeseries(row, label=categories2[i], linewidth=1)
     ax3.legend(bbox_to_anchor=(1, 1), loc='upper left')
     ax3.set_xticks(np.arange(label_length))
     ax3.set_xticklabels([])
     ax3.set_title('calibration-Slope on x, y, z axis')
 
     for i, row in enumerate(data4):
-        ax4.plot(row, label=categories2[i], linewidth=1)
+        ax4.plot_timeseries(row, label=categories2[i], linewidth=1)
     ax4.legend(bbox_to_anchor=(1, 1), loc='upper left')
     ax4.set_xticks(np.arange(label_length))
     ax4.set_xticklabels(x_labels)
