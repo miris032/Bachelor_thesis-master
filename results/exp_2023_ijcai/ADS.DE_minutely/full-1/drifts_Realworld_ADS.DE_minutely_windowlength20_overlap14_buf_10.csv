@@ -1,5 +1,0 @@
-dataset,alpha,window_width,overlaps,detection_buf_size,slidshap_drift_pos,p_value,statistical_test
-Realworld_ADS.DE_minutely,0.01,20,14,10,28,9.733180946431429e-06,t-test
-Realworld_ADS.DE_minutely,0.01,20,14,10,280,0.0003088885210261381,t-test
-Realworld_ADS.DE_minutely,0.01,20,14,10,281,0.0028023849172976907,t-test
-Realworld_ADS.DE_minutely,0.01,20,14,10,703,0.007142545988914247,t-test

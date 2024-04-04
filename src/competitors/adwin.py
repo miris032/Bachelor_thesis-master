@@ -13,20 +13,18 @@ class Adwin_Competitor(Competitor, ABC):
 
         drift_prediction = []
         test = self.dataset.iloc[:, :-1]
-        model_list = []
-        for dim in range(test.shape[1]):
-            model_list.append(ADWIN())
+        adwin_detector = ADWIN()
 
         for i in range(test.shape[0]):
             drift = False
             for dim in range(test.shape[1]):
-                model_list[dim].add_element(test.iloc[i, dim])
-                if model_list[dim].detected_change():
+                adwin_detector.add_element(test.iloc[i, dim])
+                if adwin_detector.detected_change():
                     drift = True
-                    for d in range(test.shape[1]):
-                        model_list[d].reset()
+                    adwin_detector.reset()
                     break
             drift_prediction.append(1 if drift else 0)
 
         assert len(drift_prediction) == self.dataset.shape[0], 'wrong prediction length'
         return drift_prediction
+

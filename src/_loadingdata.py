@@ -8,9 +8,7 @@ root = Path(__file__).resolve().parent.parent
 
 def load_data(data):
 
-    # path = f'{root}/data/ticker_data/columns_minutely/' + data
     path = f'{root}/data/' + data
-    print(f'read from: {path}')
 
     if os.path.exists(path + '.pkl'):
         _mydata = pd.read_pickle(path + '.pkl')
@@ -19,7 +17,7 @@ def load_data(data):
         _mydata = np.loadtxt(path + '.txt', delimiter=",")
 
     elif os.path.exists(path + '.csv'):
-        _mydata = np.asarray(pd.read_csv(path + '.csv', delimiter=","))
+        _mydata = np.asarray(pd.read_csv(path + '.csv', delimiter=",", header=None))
     #         _mydata = _mydata)
     else:
         raise FileNotFoundError(path+'.*')

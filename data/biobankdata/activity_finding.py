@@ -15,6 +15,7 @@ def get_features(file, selected_rows_range, feature_columns):
     # 选择指定的行和特征列
     selected_rows = list(range(selected_rows_range.start, selected_rows_range.stop + 1))
     selected_data = data1.iloc[selected_rows, feature_columns]
+    print(selected_data)
 
     # 对特征列进行汇总（计数）
     feature_counts = selected_data.sum(axis=0)
@@ -22,28 +23,43 @@ def get_features(file, selected_rows_range, feature_columns):
     return feature_counts
 
 
-def run(begin, end):
+def run(end):
     for i in range(1, 10):
-        if i == 1:
-            print(f'acc{i}')
-            print(get_features(f'dataset{i}-timeSeries_after_filling', range(begin, end), list(range(1, 5))))
-        else:
-            print(f'acc{i}')
-            print(get_features(f'dataset{i}-timeSeries_filled', range(begin, end), list(range(1, 5))))
+        print(f'acc{i}')
+        print(get_features(f'dataset{i}-timeSeries_filled', range(end-60, end), list(range(1, 5))))
+        print()
+
 
 if __name__ == '__main__':
-    run(1752, 1811)
-    # run(2537, 2596)
-    # run(4409, 4468)
-    # run(5375, 5434)
-    # run(8334, 8393)
-    # run(8696, 8755)
 
-    # run(10206, 10265)
-    # run(11232, 11292)
-    # run(13165, 13224)
-    # run(14191, 14251)
-    # run(16123, 16183)
-    # run(17271, 17330)
+    #run(1359)
+    #run(1989)
+    #run(2529)
+    #run(3309)
+    #run(4029)
+    #run(4809)
+    #run(5649)
+    #run(5979)
+    #run(7059)
+    
+    #run(7659)
+    #run(7899)
+    #run(8049)
+    #run(8349)
+    #run(9879)
+    #run(10509)
+    #run(10839)
+    #run(11559)
+    #run(12069)
+
+    #run(12789)
+    #run(14259)
+    #run(15729)
+    #run(16209)
+    #run(16449)
+    #run(17229)
+    #run(17859)
+    run(18429)
+
 
 

@@ -1,0 +1,12 @@
+dataset,alpha,window_width,overlaps,detection_buf_size,slidshap_drift_pos,p_value,statistical_test
+Realworld_dataset1-timeSeries_filled,0.01,200,140,10,106,0.0035084016962848396,t-test
+Realworld_dataset1-timeSeries_filled,0.01,200,140,10,122,5.8159463616072375e-05,t-test
+Realworld_dataset1-timeSeries_filled,0.01,200,140,10,123,0.0004607546440012406,t-test
+Realworld_dataset1-timeSeries_filled,0.01,200,140,10,124,0.0018856834763372162,t-test
+Realworld_dataset1-timeSeries_filled,0.01,200,140,10,150,0.0003747244698283651,t-test
+Realworld_dataset1-timeSeries_filled,0.01,200,140,10,151,0.00175324044647415,t-test
+Realworld_dataset1-timeSeries_filled,0.01,200,140,10,152,0.00603892056484336,t-test
+Realworld_dataset1-timeSeries_filled,0.01,200,140,10,215,0.00038549559053143074,t-test
+Realworld_dataset1-timeSeries_filled,0.01,200,140,10,216,0.0014967724477250824,t-test
+Realworld_dataset1-timeSeries_filled,0.01,200,140,10,252,0.0024267168602766587,t-test
+Realworld_dataset1-timeSeries_filled,0.01,200,140,10,253,0.008860444265910346,t-test

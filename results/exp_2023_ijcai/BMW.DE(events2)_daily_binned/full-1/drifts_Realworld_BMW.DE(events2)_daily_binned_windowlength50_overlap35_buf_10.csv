@@ -1,0 +1,11 @@
+dataset,alpha,window_width,overlaps,detection_buf_size,slidshap_drift_pos,p_value,statistical_test
+Realworld_BMW.DE(events2)_daily_binned,0.01,50,35,10,19,0.0007448596410534734,t-test
+Realworld_BMW.DE(events2)_daily_binned,0.01,50,35,10,20,0.0004913124564866159,t-test
+Realworld_BMW.DE(events2)_daily_binned,0.01,50,35,10,21,0.0015212782462141643,t-test
+Realworld_BMW.DE(events2)_daily_binned,0.01,50,35,10,102,0.009689757950784219,t-test
+Realworld_BMW.DE(events2)_daily_binned,0.01,50,35,10,216,3.9283439366430343e-08,t-test
+Realworld_BMW.DE(events2)_daily_binned,0.01,50,35,10,217,8.762871066579208e-06,t-test
+Realworld_BMW.DE(events2)_daily_binned,0.01,50,35,10,218,0.0014986146777119353,t-test
+Realworld_BMW.DE(events2)_daily_binned,0.01,50,35,10,219,0.0013217061242553334,t-test
+Realworld_BMW.DE(events2)_daily_binned,0.01,50,35,10,291,3.0158695752241174e-05,t-test
+Realworld_BMW.DE(events2)_daily_binned,0.01,50,35,10,292,0.0034311334677156044,t-test

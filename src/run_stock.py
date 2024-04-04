@@ -11,7 +11,7 @@ import jsbeautifier
 import sys
 
 
-def main(file, bins, d, a, HDDDM_window_length, KdqTree_window_length):
+def main(file, bins, d, a, HDDDM_window_length):
 
     if any(file.startswith(prefix) for prefix in ('Open', 'Close', 'High', 'Low', 'Volume', 'Adj Close')):
         single_stock = False
@@ -41,9 +41,9 @@ def main(file, bins, d, a, HDDDM_window_length, KdqTree_window_length):
     data = pd.DataFrame(data)
 
     HDDDM_result = run_competitors.run_HDDDM_competitor(int(HDDDM_window_length), data)
-    KdqTree_result = run_competitors.run_KdqTree_competitor(int(KdqTree_window_length), data)
+    # KdqTree_result = run_competitors.run_KdqTree_competitor(int(KdqTree_window_length), data)
     ADWIN_result = run_competitors.run_ADWIN_competitor(0, data)
-    np.savetxt(f'../results/exp_2023_ijcai/{file}_binned/full-1/KdqTree_bi_predictions_{file}.csv', KdqTree_result, delimiter=",", fmt='%d')
+    # np.savetxt(f'../results/exp_2023_ijcai/{file}_binned/full-1/KdqTree_bi_predictions_{file}.csv', KdqTree_result, delimiter=",", fmt='%d')
     np.savetxt(f'../results/exp_2023_ijcai/{file}_binned/full-1/HDDDM_bi_predictions_{file}.csv', HDDDM_result, delimiter=",", fmt='%d')
     np.savetxt(f'../results/exp_2023_ijcai/{file}_binned/full-1/ADWIN_bi_predictions_{file}.csv', ADWIN_result, delimiter=",", fmt='%d')
     print()
@@ -54,12 +54,20 @@ def main(file, bins, d, a, HDDDM_window_length, KdqTree_window_length):
 
 if __name__ == '__main__':
 
-    # can only set two parameters in () of d and a
-    main('BMW.DE_hourly', 100, (30, 50), (30, 70), 50, 200)
-    # main('Open_hourly', 100, (30, 50), (30, 70), 50)
+    main('BMW.DE_daily', 100, (30, 50), (30, 70), 30)
+    # main('BMW.DE_hourly', 100, (30, 50), (30, 70), 30)
+    # main('BMW.DE_minutely', 100, (10, 15), (30, 70), 15)
+    # main('Open_hourly', 100, (30, 50), (30, 70), 30)
 
-    # main('BMW.DE(events2)_minutely', 100, (10, 15), (30, 70), 50)
-    # main('BMW.DE(events)_minutely', 100, (10, 15), (30, 70), 50)
+    # main('BMW.DE(events)_daily', 100, (30, 50), (30, 70), 30)
+    # main('BMW.DE(events)_hourly', 100, (30, 50), (30, 70), 30)
+    # main('BMW.DE(events)_minutely', 100, (10, 15), (30, 70), 15)
+    # main('Open_hourly(events)', 100, (30, 50), (30, 70), 30)
 
-    # main('Open_hourly', 100, (30, 50), (30, 70), 60, 200)
+    # main('BMW.DE(events2)_daily', 100, (30, 50), (30, 70), 30)
+    # main('BMW.DE(events2)_hourly', 100, (30, 50), (30, 70), 30)
+    # main('BMW.DE(events2)_minutely', 100, (10, 15), (30, 70), 15)
+    # main('Open_hourly(events2)', 100, (30, 50), (30, 70), 30)
+
+
 

@@ -16,11 +16,11 @@ def _slidSHAPPos_to_tsPos(slidSHAPPred, window_width, overlap):
     time series, based on the last timestamp in the sliding window corresponding to each slidSHAP value.
     slidSHAPPred is the binary-encoded slidSHAP predictions. 0 no drift, 1 drift.
     """
-    ts_pred = [0 for _ in range(window_width + overlap * (len(slidSHAPPred) - 1))]
+    ts_pred = [0 for _ in range(window_width + (window_width - overlap) * (len(slidSHAPPred) - 1))]
     ts_drift_pos = []
     for idx, slidSHAP in enumerate(slidSHAPPred):
         if slidSHAP == 1:
-            ts_drift_pos.append(window_width + idx * overlap - 1)
+            ts_drift_pos.append(window_width + idx * (window_width - overlap) - 1)
     for pos in ts_drift_pos:
         ts_pred[pos] = 1
     return ts_pred
@@ -33,7 +33,7 @@ def run_drift_detection(exp_folder, dataset_name, detection_buf_size, window_len
     ts_bi_prediction_buffer = dict()
     ol = int(overlap * window_length)
     print(
-        f'Drift detection: {dataset_name}, window length{window_length}, overlap {ol}, alpha {alpha}, statistical test {statistical_test}...')
+        f'Drift detection: {dataset_name}, window length{window_length}, overlap {ol}, alpha {alpha}, statistical noise_test {statistical_test}...')
     file_name = f'slidshaps_{dataset_name}_windowlength{window_length}_overlap{ol}'
     file_path = os.path.join(exp_folder, file_name + '.txt')
     output_path = f'{exp_folder}/drifts_{dataset_name}_windowlength{window_length}_overlap{ol}_buf_{detection_buf_size}.csv'
@@ -101,6 +101,7 @@ def main(dataset_name, detection_buf_size, arg_win_width, arg_overlap, arg_alpha
 
 def _detect(shaps, detection_buf_size, alpha, gamma, statistical_test):
     length = shaps.shape[0]
+    print(f'before: len(length) = {length}')
     detected_drifts = []
     p_value_buf = []
     predictions = [0 for _ in range(length)]
@@ -121,6 +122,8 @@ def _detect(shaps, detection_buf_size, alpha, gamma, statistical_test):
             detected_drifts.append([slid - range_size, min(tmp)])
 
     predictions = _reduce_ajcent_alarms(predictions)
+    print(f'after: len(predictions) = {len(predictions)}')
+    print()
     return detected_drifts, predictions, pd.DataFrame(p_value_buf) #todo:remove
 
 

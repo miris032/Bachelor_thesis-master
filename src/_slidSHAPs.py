@@ -1,9 +1,13 @@
+import pandas as pd
+
 import __shapley_calculation as sv
 import os
 from tqdm import tqdm
 import numpy as np
 import time
 from src.binning import binning
+from pathlib import Path
+root = Path(__file__).resolve().parent.parent
 
 
 def compute_shapleyvalues(_mydata, _type, _subsets_bound=-1, approx='max'):
@@ -50,15 +54,18 @@ def generate(data, d, a):
     aa = int((d/100)*a)
 
     print(f'{d}, {a}%. {os.path.basename(data)}')
+    data = np.asarray(pd.read_csv(f'{root}/data/ticker_data/columns_hourly/' + f'{data}' + '.csv', delimiter=",", header=None))
 
-    data_shaps = run_slidshaps(binning(data, 19), d, aa, "full", -1, 'max')
+    print(data)
+
+    data_shaps = run_slidshaps(data, d, aa, "full", -1, 'max')
     # data_shaps = run_slidshaps(bin_2d_array(data, 10), d, aa, "full", -1, 'max')
 
     print(f'shaps: {data_shaps[0].shape}')
 
 
     file_name = f'{d}, {a}%.txt'
-    save_path = '../data/ticker_data_result/columns_minutely/' + os.path.basename(data) + '/'
+    save_path = '../data/ticker_data_result/'
     np.savetxt(save_path + file_name, data_shaps[0], delimiter=", ")
     print(data_shaps[1])
     print()
@@ -68,42 +75,26 @@ def generate(data, d, a):
 
 def generate_4_plots(data):
 
-    folder_path = '../data/ticker_data_result/columns_minutely/' + os.path.basename(data)
-    os.mkdir(folder_path)
-
     # d: window length, a: overlap in procent
     generate(data, 50, 30)
     generate(data, 50, 70)
     generate(data, 200, 30)
     generate(data, 200, 70)
 
+    folder_path = '../data/ticker_data_result/' + os.path.basename(data)
+    os.mkdir(folder_path)
+
 
 if __name__ == '__main__':
 
-    generate_4_plots('Volume')
+    # generate_4_plots('Volume')
+    generate_4_plots('High')
 
 
 
-    '''generate_4_plots('1COV.DE')
-    generate_4_plots('ADS.DE')
-    generate_4_plots('AIR.DE')
-    generate_4_plots('ALV.DE')
-    generate_4_plots('BAS.DE')
-    generate_4_plots('BMW.DE')
-    generate_4_plots('CBK.DE')
-    generate_4_plots('DTE.DE')
-    generate_4_plots('EOAN.DE')
-    generate_4_plots('HEI.DE')
-    generate_4_plots('HEN.DE')
-    generate_4_plots('HNR1.DE')
-    generate_4_plots('IFX.DE')
-    generate_4_plots('MRK.DE')
-    generate_4_plots('RHM.DE')
-    generate_4_plots('RWE.DE')
-    generate_4_plots('SAP.DE')
-    generate_4_plots('SIE.DE')
-    generate_4_plots('SY1.DE')
-    generate_4_plots('VNA.DE')'''
+
+
+
 
 
 

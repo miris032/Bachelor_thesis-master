@@ -1,2 +1,0 @@
-dataset,alpha,window_width,overlaps,detection_buf_size,slidshap_drift_pos,p_value,statistical_test
-Realworld_SAP.DE_hourly,0.01,50,35,10,42,0.003734582363824902,t-test

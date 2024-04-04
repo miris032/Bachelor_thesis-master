@@ -1,4 +1,0 @@
-dataset,alpha,window_width,overlaps,detection_buf_size,slidshap_drift_pos,p_value,statistical_test
-Realworld_1COV.DE_daily_binned50,0.01,100,70,10,0,0.0002300875692619597,t-test
-Realworld_1COV.DE_daily_binned50,0.01,100,70,10,1,0.0031969184685712625,t-test
-Realworld_1COV.DE_daily_binned50,0.01,100,70,10,2,0.008856539823287058,t-test

@@ -5,8 +5,8 @@ from matplotlib import pyplot as plt
 
 def sin_generator(event_number):
     # 生成数据
-    num_cycles = 4
-    num_points_per_cycle = 50
+    num_cycles = 5
+    num_points_per_cycle = 100
     total_points = num_cycles * num_points_per_cycle
     x1 = np.linspace(100, 2 * np.pi * num_cycles, total_points)  # 生成0到6π的等间隔数据，以满足3个正弦周期
     x2 = np.linspace(50, 2 * np.pi * num_cycles, total_points)
@@ -29,30 +29,19 @@ def sin_generator(event_number):
     y9 = (np.sin(x1)).astype(int) + np.random.uniform(0.3, 1.2, total_points).round(3)
     y10 = (np.sin(x1)).astype(int) + np.random.uniform(1, 5, total_points).round(3)'''
 
-    # single stock price
-    y1 = ((1.2 * np.sin(x1)).astype(int) + np.random.uniform(98.2, 99.2, total_points)).round(5)
-    y2 = ((1.2 * np.sin(x1)).astype(int) + np.random.uniform(98.2, 99.2, total_points)).round(5)
-    y3 = ((1.2 * np.sin(x1)).astype(int) + np.random.uniform(98.2, 99.2, total_points)).round(5)
-    y4 = ((1.2 * np.sin(x1)).astype(int) + np.random.uniform(98.2, 99.2, total_points)).round(5)
-    y5 = ((np.sin(x1)).astype(int) + np.random.uniform(93, 482, total_points)).astype(int)
+    # stock
+    y1 = ((3 * np.sin(x1)).astype(int) + np.random.uniform(35, 40, total_points)).round(5)
+    y2 = ((4 * np.sin(x1)).astype(int) + np.random.uniform(155, 165, total_points)).round(5)
+    y3 = ((2 * np.sin(x1)).astype(int) + np.random.uniform(122, 128, total_points)).round(5)
+    y4 = ((4 * np.sin(x1)).astype(int) + np.random.uniform(223, 230, total_points)).round(5)
+    # y5 = ((np.sin(x1)).astype(int) + np.random.uniform(93, 482, total_points)).astype(int)
+    y5 = ((3 * np.sin(x1)).astype(int) + np.random.uniform(45, 52, total_points)).round(5)
+    y6 = ((2 * np.sin(x1)).astype(int) + np.random.uniform(95, 105, total_points)).round(5)
+    y7 = ((1.2 * np.sin(x1)).astype(int) + np.random.uniform(10, 12, total_points)).round(5)
+    y8 = ((2 * np.sin(x1)).astype(int) + np.random.uniform(21, 23, total_points)).round(5)
+    y9 = ((4 * np.sin(x1)).astype(int) + np.random.uniform(11, 13, total_points)).round(5)
+    y10 = ((3 * np.sin(x1)).astype(int) + np.random.uniform(65, 70, total_points)).round(5)
 
-    # useless
-    y6 = (3 * np.cos(x1)).astype(int) + noise1 + 6.3
-    y7 = (2 * np.cos(x1)).astype(int) + noise1 + 0.1
-    y8 = (2 * np.cos(x1)).astype(int) + noise1 + 8.6
-    y9 = (5 * np.cos(x1)).astype(int) + noise1 + 3
-    y10 = (np.cos(x1)).astype(int) + noise1 + 63
-
-    '''y1 = np.random.randint(50, 59, size=500)
-    y2 = np.random.randint(265, 270, size=500)
-    y3 = np.random.randint(110, 112, size=500)
-    y4 = np.random.randint(199, 220, size=500)
-    y5 = np.random.randint(63, 72, size=500)
-    y6 = np.random.randint(84, 89, size=500)
-    y7 = np.random.randint(6, 260, size=500)
-    y8 = np.random.randint(16, 110, size=500)
-    y9 = np.random.randint(10, 210, size=500)
-    y10 = np.random.randint(63, 75, size=500)'''
 
 
 

@@ -2,11 +2,14 @@ import os.path
 import warnings
 
 import pandas as pd
+from skmultiflow.drift_detection import ADWIN, DDM
+
 from competitors.util import load_data
 from competitors.hdddm import HDDDM_Competitor
 from competitors.pcacd import PCACD_Competitor
 from competitors.kdqtree import KdqTree_Competitor
 from competitors.adwin import Adwin_Competitor
+from src.util2 import getPosition
 
 competitor_func_mapping = {'hdddm': '_run_HDDDM_competitor',
                            'adwin': '_run_ADWIN_competitor',
@@ -22,7 +25,7 @@ hdddm_batch_size = {'Cancer': 10,
 seed = 42
 
 
-def _run_HDDDM_competitor(window_length, dataset):
+def run_HDDDM_competitor(window_length, dataset):
     hdddm = HDDDM_Competitor(batch_size=window_length * 2,
                              dataset=dataset,
                              seed=seed)
@@ -30,14 +33,14 @@ def _run_HDDDM_competitor(window_length, dataset):
     return hdddm_drift_prediction
 
 
-def _run_PCACD_competitor(window_length, dataset):
+def run_PCACD_competitor(window_length, dataset):
     pcacd = PCACD_Competitor(dataset=dataset,
                              window_length=window_length)
     pcacd_drift_prediction = pcacd.run()
     return pcacd_drift_prediction
 
 
-def _run_KdqTree_competitor(window_length, dataset):
+def run_KdqTree_competitor(window_length, dataset):
     kdqTree = KdqTree_Competitor(dataset=dataset,
                                  window_length=window_length,
                                  alpha=0.05,
@@ -47,11 +50,68 @@ def _run_KdqTree_competitor(window_length, dataset):
     return kdq_drift_prediction
 
 
-def _run_ADWIN_competitor(window_length, dataset):
+def run_ADWIN_competitor(window_length, dataset):
     adwin = Adwin_Competitor(dataset=dataset)
     adwin_drift_prediction = adwin.run()
 
     return adwin_drift_prediction
+
+
+def run_DDM_competitor(window_length, dataset):
+    ddm_detector = DDM(min_num_instances=window_length)
+
+    DDM_warning_zone_pos = []
+    DDM_change_pos = []
+    for i in range(len(dataset)):
+        sample = dataset.iloc[i]
+        # 假设这里使用简单的平均值作为模型
+        prediction = sample.mean()
+        # 更新DDM检测器
+        ddm_detector.add_element(prediction)
+
+        if ddm_detector.detected_warning_zone():
+            DDM_warning_zone_pos.append(i)
+        if ddm_detector.detected_change():
+            DDM_change_pos.append(i)
+
+    # print(f'DDM: Warning zone has been detected at index: {DDM_warning_zone_pos}')
+    # print(f'DDM: Change detected at index: {DDM_change_pos}')
+    return DDM_change_pos
+
+
+
+
+
+if __name__ == '__main__':
+    from pathlib import Path
+    import numpy as np
+    import pandas as pd
+
+    root = Path(__file__).resolve().parent.parent
+    data1 = np.asarray(pd.read_csv(f'{root}/data/' + 'Synthetic_6Concepts_MUL_5000dataPerConcept_4category.txt', delimiter=",", header=None))
+    df = pd.DataFrame(data=data1)
+
+    result1 = run_ADWIN_competitor(0, df)
+    print(result1)
+    print(len(result1))
+    print(getPosition(result1))
+    print(len(getPosition(result1)))
+    print()
+
+    '''result2 = run_HDDDM_competitor(100, df)
+    print(result2)
+    print(len(result2))
+    print(getPosition(result2))
+    print(len(getPosition(result2)))
+    print()
+
+    result3 = run_PCACD_competitor(50, df)
+    print(result3)
+    print(len(result3))
+    print(getPosition(result3))
+    print(len(getPosition(result3)))'''
+
+
 
 
 def run_competitors(ts_data_name, models, label_file, window_length, exp_folder, data_folder):
@@ -65,6 +125,8 @@ def run_competitors(ts_data_name, models, label_file, window_length, exp_folder,
 
     print(f'Competitors on dataset {ts_data_name}...')
     df = load_data(ts_data_name, label_file, data_folder)
+    print(df)
+    print()
     results = []
     final_result = []
 
@@ -84,3 +146,4 @@ def run_competitors(ts_data_name, models, label_file, window_length, exp_folder,
     final_result_df = pd.concat(final_result, axis=0)
     final_result_df.to_csv(output_file, index=False,
                            header=['dataset', 'win_len', 'seed'] + models + ['label'])
+    print(final_result_df)

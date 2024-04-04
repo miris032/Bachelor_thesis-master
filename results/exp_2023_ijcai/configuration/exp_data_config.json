@@ -1,41 +1,213 @@
 {
-  "dataset1-timeSeries_after_filling_events_binned": {
-    "window_length": [50, 200],
+  "dataset1-timeSeries_filled": {
+    "window_length": [100, 200],
     "overlap": [0.3, 0.7],
     "approximation_type": "full",
     "subsets_bound": [-1]
   },
 
-  "Open_hourly_binned50": {
-    "window_length": [100],
+  "dataset1-timeSeries_filled_binned": {
+    "window_length": [50, 100, 200],
+    "overlap": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
+    "approximation_type": "full",
+    "subsets_bound": [-1]
+  },
+
+  "dataset1-timeSeries(events)_filled_binned": {
+    "window_length": [100, 200],
     "overlap": [0.3, 0.7],
     "approximation_type": "full",
     "subsets_bound": [-1]
   },
 
-  "BMW.DE_daily_binned50": {
-    "window_length": [30, 50, 100, 200],
+  "dataset1-timeSeries(events2)_filled_binned": {
+    "window_length": [100, 200],
+    "overlap": [0.3, 0.7],
+    "approximation_type": "full",
+    "subsets_bound": [-1]
+  },
+
+  "dataset2-timeSeries_filled_binned": {
+    "window_length": [100, 200],
+    "overlap": [0.3, 0.7],
+    "approximation_type": "full",
+    "subsets_bound": [-1]
+  },
+
+  "dataset2-timeSeries(events2)_filled_binned": {
+    "window_length": [100, 200],
+    "overlap": [0.3, 0.7],
+    "approximation_type": "full",
+    "subsets_bound": [-1]
+  },
+
+  "dataset3-timeSeries_filled_binned": {
+    "window_length": [100, 200],
+    "overlap": [0.3, 0.7],
+    "approximation_type": "full",
+    "subsets_bound": [-1]
+  },
+
+  "dataset4-timeSeries_filled_binned": {
+    "window_length": [100, 200],
+    "overlap": [0.3, 0.7],
+    "approximation_type": "full",
+    "subsets_bound": [-1]
+  },
+
+  "dataset5-timeSeries_filled_binned": {
+    "window_length": [100, 200],
+    "overlap": [0.3, 0.7],
+    "approximation_type": "full",
+    "subsets_bound": [-1]
+  },
+
+  "dataset6-timeSeries_filled_binned": {
+    "window_length": [100, 200],
+    "overlap": [0.3, 0.7],
+    "approximation_type": "full",
+    "subsets_bound": [-1]
+  },
+
+  "dataset7-timeSeries_filled_binned": {
+    "window_length": [100, 200],
+    "overlap": [0.3, 0.7],
+    "approximation_type": "full",
+    "subsets_bound": [-1]
+  },
+
+  "dataset8-timeSeries_filled_binned": {
+    "window_length": [100, 200],
+    "overlap": [0.3, 0.7],
+    "approximation_type": "full",
+    "subsets_bound": [-1]
+  },
+
+  "dataset9-timeSeries_filled_binned": {
+    "window_length": [100, 200],
+    "overlap": [0.3, 0.7],
+    "approximation_type": "full",
+    "subsets_bound": [-1]
+  },
+
+
+  "accs_filled_binned": {
+    "window_length": [50],
     "overlap": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
     "approximation_type": "full",
     "subsets_bound": [-1]
   },
 
-  "BMW.DE_hourly_binned50": {
-    "window_length": [30, 50, 100, 200],
+  "accs(events)_filled_binned": {
+    "window_length": [100, 200],
+    "overlap": [0.3, 0.7],
+    "approximation_type": "full",
+    "subsets_bound": [-1]
+  },
+
+  "accs(events2)_filled_binned": {
+    "window_length": [100, 200],
+    "overlap": [0.3, 0.7],
+    "approximation_type": "full",
+    "subsets_bound": [-1]
+  },
+
+
+
+
+  "BMW.DE_daily_binned": {
+    "window_length": [30, 50],
+    "overlap": [0.3, 0.7],
+    "approximation_type": "full",
+    "subsets_bound": [-1]
+  },
+
+  "BMW.DE_hourly_binned": {
+    "window_length": [30, 50],
+    "overlap": [0.3, 0.7],
+    "approximation_type": "full",
+    "subsets_bound": [-1]
+  },
+
+  "BMW.DE_minutely_binned": {
+    "window_length": [10, 15],
+    "overlap": [0.3, 0.7],
+    "approximation_type": "full",
+    "subsets_bound": [-1]
+  },
+
+  "BMW.DE(events)_daily_binned": {
+    "window_length": [30, 50],
+    "overlap": [0.3, 0.7],
+    "approximation_type": "full",
+    "subsets_bound": [-1]
+  },
+
+  "BMW.DE(events)_hourly_binned": {
+    "window_length": [30, 50],
+    "overlap": [0.3, 0.7],
+    "approximation_type": "full",
+    "subsets_bound": [-1]
+  },
+
+  "BMW.DE(events)_minutely_binned": {
+    "window_length": [10, 15],
+    "overlap": [0.3, 0.7],
+    "approximation_type": "full",
+    "subsets_bound": [-1]
+  },
+
+  "BMW.DE(events2)_daily_binned": {
+    "window_length": [30, 50],
+    "overlap": [0.3, 0.7],
+    "approximation_type": "full",
+    "subsets_bound": [-1]
+  },
+
+  "BMW.DE(events2)_hourly_binned": {
+    "window_length": [30, 50],
+    "overlap": [0.3, 0.7],
+    "approximation_type": "full",
+    "subsets_bound": [-1]
+  },
+
+  "BMW.DE(events2)_minutely_binned": {
+    "window_length": [10, 15],
+    "overlap": [0.3, 0.7],
+    "approximation_type": "full",
+    "subsets_bound": [-1]
+  },
+
+
+  "Open_hourly_test": {
+    "window_length": [30, 50],
+    "overlap": [0.3, 0.7],
+    "approximation_type": "full",
+    "subsets_bound": [-1]
+  },
+
+  "Open_hourly_binned": {
+    "window_length": [30],
     "overlap": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
     "approximation_type": "full",
     "subsets_bound": [-1]
   },
 
-  "BMW.DE_minutely_binned50": {
-    "window_length": [30, 50, 100, 200],
-    "overlap": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
+  "Open_hourly(events)_binned": {
+    "window_length": [30, 50],
+    "overlap": [0.3, 0.7],
     "approximation_type": "full",
     "subsets_bound": [-1]
   },
 
+  "Open_hourly(events2)_binned": {
+    "window_length": [30, 50],
+    "overlap": [0.3, 0.7],
+    "approximation_type": "full",
+    "subsets_bound": [-1]
+  },
 
-  "BMW.DE_minutely_events_binned50": {
+  "Close_hourly_binned": {
     "window_length": [30, 50],
     "overlap": [0.3, 0.7],
     "approximation_type": "full",

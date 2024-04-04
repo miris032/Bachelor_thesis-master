@@ -142,6 +142,7 @@ class DriftDetectionEvaluator:
                     if subset.shape[0] != 0:
                         for model in ['hdddm', 'kdqtree', 'adwin', 'pcacd']:
                             delta = window_length * model_config[model]['delta_factor']
+                            print(f'{delta} = {window_length} * model_config[model][delta_factor]')
                             if model in subset.columns:
                                 drift_detection_dl, drift_detection_tp, drift_detection_fp, drift_detection_fn, acc, precision, recall, f1, delay_mean, delay_std = self.calculate_dl_tp_fp_fn(
                                     _bi_to_pos(subset[model]), _bi_to_pos(subset['label']), delta, subset.shape[0])

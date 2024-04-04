@@ -3,14 +3,11 @@ import pandas as pd
 from src._loadingdata import load_data
 
 
+def binning(data, intervals):
 
-def binning(input_file, intervals):
-
-    data = load_data(input_file)
     # delete the header and row name
-    # data = np.delete(np.delete(data, 0, axis=0), 0, axis=1)
+    data = np.delete(np.delete(data, 0, axis=0), 0, axis=1)
     data = np.array(data, dtype=float)
-    print(f'the shape of original data {data.shape}')
 
     max_values = np.max(data, axis=0)
     min_values = np.min(data, axis=0)
@@ -25,7 +22,6 @@ def binning(input_file, intervals):
                    + [min_values[column] + j * width for j in range(l - 1)] \
                    + [np.inf]
             labels = range(0, l)
-
 
         else:
             width = (max_values[column] - min_values[column]) / intervals
@@ -44,40 +40,59 @@ def binning(input_file, intervals):
         binned_data = pd.cut(data[:,column], bins=bins, labels=labels)
         resultArray.append(binned_data.codes)
 
-        # print(binned_data)
-        # print()
-        # print()
     resultArray = np.array(resultArray)
     resultArray = np.transpose(resultArray)
     return resultArray
 
 
+def binning_global(data, intervals):
 
-'''def bin_2d_array(data, bin_size):
+    # delete the header and row name
+    data = np.delete(np.delete(data, 0, axis=0), 0, axis=1)
+    data = np.array(data, dtype=float)
+    print(f'the shape of original data {data.shape}')
 
-    data = load_data(data)
-    if bin_size <= 0:
-        raise ValueError("分箱单位必须大于0")
+    max_values = np.max(data, axis=0)
+    min_values = np.min(data, axis=0)
 
-    num_rows, num_cols = data.shape
-    bin_data = np.zeros((num_rows, num_cols), dtype=int)
+    # Calculate overall min and max values for the entire dataset
+    overall_min = np.min(min_values)
+    overall_max = np.max(max_values)
 
-    for i in range(num_rows):
-        for j in range(num_cols):
-            bin_data[i, j] = data[i, j] // bin_size
+    width = (overall_max - overall_min) / intervals
 
-    return bin_data'''
+    resultArray = []
+
+    for column in range(data.shape[1]):
+        # Calculate bins and labels for each column based on overall min and max
+        bins = [-np.inf] + [overall_min + j * width for j in range(intervals-1)] + [np.inf]
+        labels = range(0, intervals)
+
+        # Apply binning to each column
+        binned_data = pd.cut(data[:, column], bins=bins, labels=labels)
+        resultArray.append(binned_data.codes)
+
+    resultArray = np.array(resultArray)
+    resultArray = np.transpose(resultArray)
+    return resultArray
 
 
-def main(file, intervals):
+def main_local(file, intervals):
     binned_data = binning(file, intervals)
     print(f'the shape of binned data {binned_data.shape}')
-    np.savetxt('../data/' + file + '_binned.csv', binned_data, delimiter=',')
+    np.savetxt('../data/' + file + '_binned50.csv', binned_data, delimiter=',', fmt='%d')
 
+
+def main_global(file, intervals):
+    binned_data = binning_global(file, intervals)
+    print(f'the shape of binned data {binned_data.shape}')
+    np.savetxt('../data/' + file + '_binned50.csv', binned_data, delimiter=',', fmt='%d')
 
 
 if __name__ == '__main__':
-    main("Realworld_High_hourly", 19)
+    # main_local("Realworld_BMW.DE_minutely_events", 49)
+    main_global("Realworld_Open_hourly_events", 49)
+
 
 
 

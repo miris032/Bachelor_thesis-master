@@ -12,9 +12,8 @@ from run_competitors import run_competitors
 from evaluator import DriftDetectionEvaluator
 from util import load_data_parameters, load_slidshaps_parameters
 
-
 experiment_id = 'exp_2023_ijcai'
-datasets = ['Synthetic',  'Cancer', 'LED_10000_10', 'Poker',  'MSL', 'KDD_all', 'LED_10000_10']
+datasets = ['dataset1-timeSeries_filled_binned'] # dataset1-timeSeries_filled, accs_filled_binned, Open_hourly_binned
 
 competitors = ['hdddm', 'adwin', 'kdqtree', 'pcacd']
 root_path = os.path.dirname(Path(os.path.realpath(__file__)).parent)
@@ -33,7 +32,8 @@ def _run_synthetic_generator(input_data_folder, concept_size, categories_per_fea
 
 def _calc_slidshaps(exp_folder, ts_data_name, window_length, overlap, approximation_type, subsets_bound):
     ol = int(overlap * window_length)
-    slidshaps_output_path = os.path.join(exp_folder, f'slidshaps_{ts_data_name}_windowlength{window_length}_overlap{ol}.txt')
+    slidshaps_output_path = os.path.join(exp_folder,
+                                         f'slidshaps_{ts_data_name}_windowlength{window_length}_overlap{ol}.txt')
     pathruntimes = os.path.join(exp_folder, f'time_{ts_data_name}_windowlength{window_length}_overlap{ol}.txt')
 
     if os.path.exists(slidshaps_output_path):
@@ -44,8 +44,8 @@ def _calc_slidshaps(exp_folder, ts_data_name, window_length, overlap, approximat
     else:
         _mydata = _loadingdata.load_data(ts_data_name)
     print(ts_data_name)
-    data_shaps, running_time = run_slidshaps(_mydata, window_length, ol, approximation_type, subsets_bound, _approx='max')
-
+    data_shaps, running_time = run_slidshaps(_mydata, window_length, ol, approximation_type, subsets_bound,
+                                             _approx='max')
 
     np.savetxt(slidshaps_output_path, data_shaps, delimiter=", ")
     np.savetxt(pathruntimes, [running_time], delimiter=", ")
@@ -63,7 +63,7 @@ def _run_competitors(ts_data_name, competitors, label_file, window_length, exp_f
 
 def run_experiments(dataset, use_existing_synthetic_data=True):
     window_length_list, overlap_list, concept_size_list, number_of_concepts_list, categories_per_feature_list, \
-    correlation_func_list, approximation_type, subsets_bound_list = load_data_parameters(dataset, config_folder)
+        correlation_func_list, approximation_type, subsets_bound_list = load_data_parameters(dataset, config_folder)
     statistical_test_list, gamma_list, buffer_size_list, alpha_list = load_slidshaps_parameters(config_folder)
 
     if not os.path.exists(os.path.join(results_folder, 'configuration')):
@@ -87,7 +87,7 @@ def run_experiments(dataset, use_existing_synthetic_data=True):
         else:
             sub_folder_name = dataset
             ts_data_name = f'Realworld_{dataset}'
-        exp_folder = os.path.join(results_folder, sub_folder_name, approximation_type+str(subsets_bound))
+        exp_folder = os.path.join(results_folder, sub_folder_name, approximation_type + str(subsets_bound))
         label_file = f'Synthetic_{number_of_concepts}Concepts_{concept_size}dataPerConcept_label.txt' \
             if dataset == 'Synthetic' else f'{ts_data_name}_label.txt'
 
@@ -98,7 +98,7 @@ def run_experiments(dataset, use_existing_synthetic_data=True):
             if os.path.exists(os.path.join(data_folder, ts_data_name + '.txt')) and not use_existing_synthetic_data:
                 os.remove(os.path.join(data_folder, ts_data_name + '.txt'))
                 _run_synthetic_generator(data_folder, concept_size, categories_per_feature, number_of_concepts,
-                                     correlation_func)
+                                         correlation_func)
             elif not os.path.exists(os.path.join(data_folder, ts_data_name + '.txt')):
                 _run_synthetic_generator(data_folder, concept_size, categories_per_feature, number_of_concepts,
                                          correlation_func)
@@ -109,7 +109,7 @@ def run_experiments(dataset, use_existing_synthetic_data=True):
             for detection_buf_size in buffer_size_list:
                 _run_drift_detection(exp_folder, ts_data_name, detection_buf_size, window_length, overlap, alpha,
                                      gamma, statistical_test)
-            _run_competitors(ts_data_name, competitors, label_file, window_length, exp_folder, data_folder)
+            # _run_competitors(ts_data_name, competitors, label_file, window_length, exp_folder, data_folder)
 
 
 def run_evaluation(eval_folder):
@@ -121,7 +121,12 @@ def run_evaluation(eval_folder):
 def main():
     for dataset in datasets:
         run_experiments(dataset)
-    run_evaluation(results_folder)
+    # run_evaluation(results_folder)
+
+
+def main2(file):
+    run_experiments(file)
+    # run_evaluation(results_folder)
 
 
 if __name__ == '__main__':

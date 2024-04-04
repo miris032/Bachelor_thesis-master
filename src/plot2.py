@@ -49,7 +49,7 @@ def drawPlot(data_Nr, d, a_list):
 
         # 1. draw the line plot
         acc = shapleyed_data[0, :]
-        axs[i].plot(acc, label=f'acc', linewidth=0.3)
+        axs[i].plot_timeseries(acc, label=f'acc', linewidth=0.3)
         axs[i].set_title(f"d: {d},  a: {a_list[i]}")
 
         # 2. filling color on the line plot
@@ -121,7 +121,7 @@ def draw_line_separately(data_Nr, d, a):
               'shapley value for sedentary', 'shapley value for sleep', 'shapley value for MET')
     for i in range(6):
         # 1. draw subPlots with different line
-        axs[i].plot(shapleyed_data[i, :], label=header[i], linewidth=0.3)
+        axs[i].plot_timeseries(shapleyed_data[i, :], label=header[i], linewidth=0.3)
         axs[i].set_title(header[i])
 
         # 2. filling color on the line plot

@@ -1,0 +1,6 @@
+dataset,alpha,window_width,overlaps,detection_buf_size,slidshap_drift_pos,p_value,statistical_test
+Realworld_Open_hourly_binned,0.01,30,18,10,131,0.0024841434352325686,t-test
+Realworld_Open_hourly_binned,0.01,30,18,10,143,4.451105027559368e-05,t-test
+Realworld_Open_hourly_binned,0.01,30,18,10,145,0.005321597366020513,t-test
+Realworld_Open_hourly_binned,0.01,30,18,10,146,0.002882668111316323,t-test
+Realworld_Open_hourly_binned,0.01,30,18,10,147,0.005752370514896183,t-test

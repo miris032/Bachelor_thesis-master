@@ -1,3 +1,0 @@
-dataset,alpha,window_width,overlaps,detection_buf_size,slidshap_drift_pos,p_value,statistical_test
-Realworld_BMW.DE_minutely_binned50,0.01,100,80,10,58,0.004675741625883225,t-test
-Realworld_BMW.DE_minutely_binned50,0.01,100,80,10,59,0.009464468226059853,t-test

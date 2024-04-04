@@ -2,10 +2,11 @@ import csv
 import math
 import os
 from pathlib import Path
-from src.util2 import ts_pos_to_slid_pos
+from src.util2 import ts_poslist_to_slid_poslist, ts_pos_to_slid_pos
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from textwrap import wrap
 root = Path(__file__).resolve().parent.parent
 
 
@@ -44,28 +45,28 @@ def draw_4_plots(file, l, a):
     for i, value in enumerate(slidshap_prediction1):
         if value == 1:
             ax1.axvline(x=i, color='red', linestyle='--', linewidth=1)
-    ax1.set_title(f'length d = {l[0]}, overlap a = {a[0]}%')
+    ax1.set_title(f'length d = {l[0]}, overlap a = {a[0]}%', fontsize=18)
 
     for i, row in enumerate(data2):
         ax2.plot(row, label=header[i], linewidth=0.5, color=colors[i])
     for i, value in enumerate(slidshap_prediction2):
         if value == 1:
             ax2.axvline(x=i, color='red', linestyle='--', linewidth=1)
-    ax2.set_title(f'length d = {l[0]}, overlap a = {a[1]}%')
+    ax2.set_title(f'length d = {l[0]}, overlap a = {a[1]}%', fontsize=18)
 
     for i, row in enumerate(data3):
         ax3.plot(row, label=header[i], linewidth=0.5, color=colors[i])
     for i, value in enumerate(slidshap_prediction3):
         if value == 1:
             ax3.axvline(x=i, color='red', linestyle='--', linewidth=1)
-    ax3.set_title(f'length d = {l[1]}, overlap a = {a[0]}%')
+    ax3.set_title(f'length d = {l[1]}, overlap a = {a[0]}%', fontsize=18)
 
     for i, row in enumerate(data4):
         ax4.plot(row, label=header[i], linewidth=0.5, color=colors[i])
     for i, value in enumerate(slidshap_prediction4):
         if value == 1:
             ax4.axvline(x=i, color='red', linestyle='--', linewidth=1)
-    ax4.set_title(f'length d = {l[1]}, overlap a = {a[1]}%')
+    ax4.set_title(f'length d = {l[1]}, overlap a = {a[1]}%', fontsize=18)
 
     # draw the events areas
     if '(events)' in file or '(events2)' in file:
@@ -74,49 +75,62 @@ def draw_4_plots(file, l, a):
             insert_ends = (1450, 2900, 4350, 5800, 7250)'''
             insert_starts = (1200, 2400, 3600, 4800, 6000)
             insert_ends = (1450, 2650, 3850, 5050, 6250)
+            # insert_starts = (1200, 1450,   2400, 2650,   3600, 3850,   4800, 5050,   6000, 6250)
+            # insert_ends = (1230, 1480,   2430, 2680,   3630, 3880,   4830, 5080,   6030, 6280)
         elif file.split('_')[1] == 'hourly':
             '''insert_starts = (1001, 2201, 3401, 4601, 5801)
             insert_ends = (1200, 2400, 3600, 4800, 6000)'''
-            insert_starts = (1000, 2000, 3000, 4000, 5000)
-            insert_ends = (1200, 2200, 3200, 4200, 5200)
+            # insert_starts = (1000, 2000, 3000, 4000, 5000)
+            # insert_ends = (1200, 2200, 3200, 4200, 5200)
+            insert_starts = (1000, 1200,   2000, 2200,   3000, 3200,   4000, 4200,   5000, 5200)
+            insert_ends = (1030, 1230,   2030, 2230,   3030, 3230,   4030, 4230,   5030, 5230)
         elif file.split('_')[1] == 'minutely':
             '''insert_starts = (301, 671, 1041, 1411, 1781)
             insert_ends = (370, 740, 1110, 1480, 1850)'''
             insert_starts = (300, 600, 900, 1200, 1500)
             insert_ends = (370, 670, 970, 1270, 1570)
-            # mix
+
+        # mix
         else:
             '''insert_starts = (1001, 2201, 3401, 4601, 5801)
             insert_ends = (1200, 2400, 3600, 4800, 6000)'''
-            insert_starts = (1000, 2000, 3000, 4000, 5000)
-            insert_ends = (1200, 2200, 3200, 4200, 5200)
+            # insert_starts = (1000, 2000, 3000, 4000, 5000)
+            # insert_ends = (1200, 2200, 3200, 4200, 5200)
+            insert_starts = (1000, 1200,   2000, 2200,   3000, 3200,   4000, 4200,   5000, 5200)
+            insert_ends = (1030, 1230,   2030, 2230,   3030, 3230,   4030, 4230,   5030, 5230)
 
         # shadow areas
         ylim = plt.gca().get_ylim()
         for i, axi in enumerate([ax1, ax2]):
-            start_slidSHAPs = ts_pos_to_slid_pos(insert_starts, l[0], a[i])
-            end_slidSHAPs = ts_pos_to_slid_pos(insert_ends, l[0], a[i])
+            buffer_size = 5 * l[0]
+            start_slidSHAPs = ts_poslist_to_slid_poslist(insert_starts, l[0], a[i])
+            end_slidSHAPs = ts_poslist_to_slid_poslist(insert_ends, l[0], a[i])
             for j in range(len(insert_starts)):
                 print(f'{start_slidSHAPs[j]}-{end_slidSHAPs[j]}')
                 axi.fill_between(np.linspace(start_slidSHAPs[j], end_slidSHAPs[j]), 0, ylim[1], color='gray', hatch='///', alpha=0.2)
+                axi.fill_between(np.linspace(end_slidSHAPs[j], end_slidSHAPs[j] + ts_pos_to_slid_pos(buffer_size, l[0], a[i])), 0, ylim[1], color='purple', hatch='///', alpha=0.1)
         print()
         for i, axi in enumerate([ax3, ax4]):
-            start_slidSHAPs = ts_pos_to_slid_pos(insert_starts, l[1], a[i])
-            end_slidSHAPs = ts_pos_to_slid_pos(insert_ends, l[1], a[i])
+            buffer_size = 5 * l[1]
+            start_slidSHAPs = ts_poslist_to_slid_poslist(insert_starts, l[1], a[i])
+            end_slidSHAPs = ts_poslist_to_slid_poslist(insert_ends, l[1], a[i])
             for j in range(len(insert_starts)):
                 print(f'{start_slidSHAPs[j]}-{end_slidSHAPs[j]}')
-                axi.fill_between(np.linspace(start_slidSHAPs[j], end_slidSHAPs[j]), ylim[0], ylim[1], color='gray', hatch='///', alpha=0.2)
+                axi.fill_between(np.linspace(start_slidSHAPs[j], end_slidSHAPs[j]), 0, ylim[1], color='gray', hatch='///', alpha=0.2)
+                axi.fill_between(np.linspace(end_slidSHAPs[j], end_slidSHAPs[j] + ts_pos_to_slid_pos(buffer_size, l[1], a[i])), 0, ylim[1], color='purple', hatch='///', alpha=0.1)
+
 
     # plt.legend(bbox_to_anchor=(0.1, 0.1), loc='upper left')
     fig.set_size_inches(20, 8)
-    plt.subplots_adjust(hspace=0.8)
+    plt.subplots_adjust(left=0.025, right=0.875, hspace=0.76)
 
     # add the handle for the red dash line
     existing_handles, existing_labels = plt.gca().get_legend_handles_labels()
     new_handles = [plt.Line2D([0], [0], color='red', linestyle='--', linewidth=1, label='slidSHAPs detection')]
     all_handles = existing_handles + new_handles
     all_labels = existing_labels + ['slidSHAPs detection']
-    plt.legend(handles=all_handles, labels=all_labels, loc='upper left', bbox_to_anchor=(1.005, 6.4), prop={'size': 8})
+    labels = ['\n'.join(wrap(label, 10)) for label in all_labels]
+    plt.legend(handles=all_handles, labels=labels, loc='upper left', bbox_to_anchor=(1.005, 6.4), prop={'size': 16})
 
     plt.savefig(f'../data/ticker_data_plots/slidshap_{filename}.png')
     # plt.show()
@@ -127,8 +141,11 @@ def draw_4_plots(file, l, a):
 
 if __name__ == '__main__':
 
-    draw_4_plots('BMW.DE_daily_binned50', (30, 50), (30, 70))
-    # draw_4_plots('Open_hourly_events_binned50', (50, 100), (30, 70))
+    # draw_4_plots('BMW.DE_daily_binned', (30, 50), (30, 70))
+    # draw_4_plots('Open_hourly_binned', (30, 50), (30, 70))
+
+    draw_4_plots('BMW.DE(events2)_hourly_binned', (30, 50), (30, 70))
+    # draw_4_plots('Open_hourly(events)_binned', (30, 50), (30, 70))
 
 
 
